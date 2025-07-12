@@ -11,14 +11,12 @@ let countdownInterval = null;
 
 const pickTime = document.querySelector("#datetime-picker");
 const buttonStart = document.querySelector("[data-start]");
-const buttonStop = document.querySelector("[data-stop]");
 const daysCount = document.querySelector("[data-days]");
 const hoursCount = document.querySelector("[data-hours]");
 const minutesCount = document.querySelector("[data-minutes]");
 const secondsCount = document.querySelector("[data-seconds]");
 
 buttonStart.disabled = true;
-buttonStop.disabled = true;
 
 
 const options = {
@@ -43,12 +41,10 @@ const options = {
             progressBar: false
         });
       buttonStart.disabled = true;
-      buttonStop.disabled = true;
       userSelectedDate = null;
     } else {
       userSelectedDate = selectedDate;
       buttonStart.disabled = false;
-      buttonStop.disabled = true;
     }
   },
 };
@@ -67,7 +63,6 @@ buttonStart.addEventListener("click", () => {
   }
 
   buttonStart.disabled = true;
-  buttonStop.disabled = false;
   pickTime.disabled = true;
 
   countdownInterval = setInterval(() => {
@@ -86,16 +81,6 @@ buttonStart.addEventListener("click", () => {
     updateTimer(days, hours, minutes, seconds);
   }, 1000);
 });
-
-buttonStop.addEventListener("click", () => {
-  buttonStart.disabled = false;
-  buttonStop.disabled = true;
-  pickTime.disabled = false;
-
-  userSelectedDate = null;
-  countdownInterval = null;
-  resetTimer();
-})
 
 function convertMs(ms) {
     const second = 1000;
