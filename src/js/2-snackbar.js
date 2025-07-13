@@ -39,7 +39,7 @@ form.addEventListener("submit", (event) => {
 
     const promise = new Promise((resolve, reject) => {
         setTimeout(() => {
-            if (fulfilledCheck.checked) {
+            if (fulfilledCheck.isActive) {
                 resolve(currentDelay);
             } else {
                 reject(currentDelay);
