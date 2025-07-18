@@ -54,7 +54,6 @@ form.addEventListener("submit", (event) => {
                 progressBar: false,
                 icon: ""
             });
-            console.log(`✅ Fulfilled promise in ${delay}ms`);
         })
         .catch(delay => {
             iziToast.error({
@@ -64,6 +63,5 @@ form.addEventListener("submit", (event) => {
                 progressBar: false,
                 icon: ""
             });
-            console.log(`❌ Rejected promise in ${delay}ms`);
         });
 });
