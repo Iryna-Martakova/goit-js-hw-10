@@ -4,14 +4,12 @@ import "izitoast/dist/css/iziToast.min.css";
 
 const form = document.querySelector('.form');
 const delayInput = form.querySelector('input[name="delay"]');
-const fulfilledCheck = form.querySelector('input[name="state"][value="fulfilled"]');
 
 form.addEventListener("submit", (event) => {
     event.preventDefault();
 
     const currentDelay = Number(delayInput.value);
-
-    if (currentDelay < 0) {
+    if (currentDelay < 0 || !currentDelay) {
         iziToast.error({
             title: 'Error',
             message: 'Type positive number',
@@ -23,12 +21,11 @@ form.addEventListener("submit", (event) => {
         return;
     }
 
-    const selectedState = document.querySelector('input[name="state"]:checked');
-
+    const selectedState = form.querySelector('input[name="state"]:checked');
     if (!selectedState) {
         iziToast.error({
             title: 'Error',
-            message: 'Choose a state".',
+            message: 'Choose a state.',
             position: 'topRight',
             close: false,
             progressBar: false,
@@ -37,9 +34,10 @@ form.addEventListener("submit", (event) => {
         return;
     }
 
+    const stateValue = selectedState.value;
     const promise = new Promise((resolve, reject) => {
         setTimeout(() => {
-            if (fulfilledCheck.isActive) {
+            if (stateValue === "fulfilled") {
                 resolve(currentDelay);
             } else {
                 reject(currentDelay);
